@@ -1,0 +1,12 @@
+# IntelliJ project files
+.idea
+venv
+*.iml
+out
+gen
+
+# HTML Reports
+Results/*
+*.html
+*.xml
+*.png
