@@ -1,7 +1,6 @@
 *** Settings ***
 Library         SeleniumLibrary
 
-
 *** Variables ***
 ${URL}          https://www.google.com.br
 ${BROWSER}      Chrome
