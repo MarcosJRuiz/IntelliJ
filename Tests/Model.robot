@@ -1,41 +1,35 @@
 *** Settings ***
 #  Used for Importing test libraries, resource files and variable files.
+Resource    ../Resources/DriverFactoreBrowser.robot
 
 Documentation   Simple example using SeleniumLibrary.
-Library         SeleniumLibrary
+Suite Setup     Open Browser On The Page
+Suite Teardown  Finish Browser
 
 
 *** Variables ***
 # Used for defining variables that can be used elsewhere in the test.
-
-${URL}          https://www.google.com.br
-${BROWSER}      Chrome
-${DRIVERS}      C:/dev/tools/drivers/chromedriver.exe
-${options}      add_experimental_option('excludeSwitches',['enable-logging'])
+${Input_Search}          //input[@title="Pesquisar"]
+${Value_Search}         fast.com
+${Result_Search}        fast.com - Pesquisa Google
 
 
 *** Test Cases ***
 # Used for writing our tests.
 
 Valid Login
-    Open Browser To Login Page
-    Search Google       fast.com
-    Title Of Page       fast.com - Pesquisa Google
-    Close Browser
+    Search Google       ${Value_Search}
+    Title Of Page       ${Result_Search}
 
 
 *** Keywords ***
 # Used for creating custom keywords from existing lower-level keywords.
 
-Open Browser To Login Page
-    Open Browser    ${URL}    ${BROWSER}   options=${options}  executable_path=${DRIVERS}
-
 Search Google
     [Arguments]     ${valueSearch}
-    Input Text      //input[@title="Pesquisar"]    ${valueSearch}
-    Sleep   2s
-    Press Keys      //input[@title="Pesquisar"]     ENTER
-    Sleep   2s
+    Input Text      ${Input_Search}    ${valueSearch}
+    Sleep   1s
+    Press Keys      ${Input_Search}     ENTER
 
 Title Of Page
     [Arguments]     ${title}
